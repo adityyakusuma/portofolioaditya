@@ -99,7 +99,7 @@ const content = {
     contactTitle: "Software, Systems & Data Solutions.",
     contactDesc:
       "Feel free to contact me regarding IT development, web applications, business systems, data analytics, application support, or professional opportunities.",
-    footer: "© 2026 Aditya Kusuma — Portfolio",
+    footer: "© 2026 Aditya Kusuma — Portofolio",
   },
 
   IN: {
@@ -173,7 +173,7 @@ const content = {
     contactTitle: "Solusi Software, Sistem & Data.",
     contactDesc:
       "Silakan hubungi saya untuk kebutuhan IT development, web application, business system, data analytics, application support, atau kesempatan kerja profesional.",
-    footer: "© 2026 Aditya Kusuma — IT Developer Portfolio",
+    footer: "© 2026 Aditya Kusuma — Portofolio",
   },
 };
 
@@ -830,7 +830,7 @@ function App() {
       </section>
 
       <footer className="footer">
-        <p>Thank you</p>
+        <p>Terimakasih</p>
         <span>{t.footer}</span>
       </footer>
 
