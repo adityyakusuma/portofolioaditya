@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./index.css";
-import profilePhoto from "./assets/aditya-profile.png";
+import LanyardCard from "./components/LanyardCard";
 
 const logos = {
   react: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
@@ -48,7 +48,7 @@ const content = {
     stats: [
       { value: "3+", label: "Featured Projects" },
       { value: "2", label: "Work Experiences" },
-      { value: "3.66", label: "GPA" },
+      { value: "10+", label: "Tech Skills" },
       { value: "6", label: "Career Targets" },
     ],
     rolesTitle: "Career Direction",
@@ -99,6 +99,9 @@ const content = {
     contactTitle: "Software, Systems & Data Solutions.",
     contactDesc:
       "Feel free to contact me regarding IT development, web applications, business systems, data analytics, application support, or professional opportunities.",
+
+      thankYou: "Thank You",
+
     footer: "© 2026 Aditya Kusuma — Portofolio",
   },
 
@@ -173,7 +176,10 @@ const content = {
     contactTitle: "Solusi Software, Sistem & Data.",
     contactDesc:
       "Silakan hubungi saya untuk kebutuhan IT development, web application, business system, data analytics, application support, atau kesempatan kerja profesional.",
-    footer: "© 2026 Aditya Kusuma — Portofolio",
+
+      thankYou: "Terima Kasih",
+    
+      footer: "© 2026 Aditya Kusuma — Portofolio",
   },
 };
 
@@ -185,6 +191,68 @@ const targetRoles = [
   "Data Analyst Support",
   "Application Support",
 ];
+
+const roleLabels = {
+  EN: {
+    "IT Developer": "IT Developer",
+    "Web Developer": "Web Developer",
+    "Frontend Developer": "Frontend Developer",
+    "Junior System Analyst": "Junior System Analyst",
+    "Data Analyst Support": "Data Analyst Support",
+    "Application Support": "Application Support",
+  },
+
+  IN: {
+    "IT Developer": "Pengembang TI",
+    "Web Developer": "Pengembang Web",
+    "Frontend Developer": "Pengembang Frontend",
+    "Junior System Analyst": "Analis Sistem Junior",
+    "Data Analyst Support": "Dukungan Analis Data",
+    "Application Support": "Dukungan Aplikasi",
+  },
+};
+
+const roleDescriptions = {
+  EN: {
+    "IT Developer":
+      "Developing business-oriented software, internal systems, and digital solutions that improve operational efficiency and support organizational growth.",
+
+    "Web Developer":
+      "Building modern web applications with responsive interfaces, reliable backend integration, and scalable database architecture.",
+
+    "Frontend Developer":
+      "Creating intuitive user experiences through clean interfaces, responsive design, smooth interactions, and attention to usability.",
+
+    "Junior System Analyst":
+      "Bridging business requirements and technical implementation by analyzing workflows, documenting processes, and proposing system improvements.",
+
+    "Data Analyst Support":
+      "Transforming raw data into meaningful reports, dashboards, and insights that help stakeholders make informed decisions.",
+
+    "Application Support":
+      "Ensuring business applications run smoothly through troubleshooting, issue resolution, testing, maintenance, and user assistance.",
+  },
+
+  IN: {
+    "IT Developer":
+      "Mengembangkan software, sistem bisnis, dan solusi digital yang membantu meningkatkan efisiensi operasional serta mendukung pertumbuhan perusahaan.",
+
+    "Web Developer":
+      "Membangun aplikasi web modern dengan tampilan responsif, integrasi backend yang andal, serta struktur database yang terorganisir.",
+
+    "Frontend Developer":
+      "Menciptakan pengalaman pengguna yang nyaman melalui desain antarmuka yang bersih, responsif, dan mudah digunakan.",
+
+    "Junior System Analyst":
+      "Menjembatani kebutuhan bisnis dengan implementasi teknis melalui analisis proses kerja, dokumentasi sistem, dan rekomendasi perbaikan.",
+
+    "Data Analyst Support":
+      "Mengolah data menjadi laporan, dashboard, dan insight yang dapat membantu pengambilan keputusan bisnis secara lebih efektif.",
+
+    "Application Support":
+      "Menjaga aplikasi tetap berjalan stabil melalui troubleshooting, testing, maintenance, penyelesaian masalah, dan dukungan kepada pengguna.",
+  },
+};
 
 const roleMap = {
   "IT Developer": ["React.js", "PHP", "MySQL", "REST API", "POS Retail System"],
@@ -615,16 +683,8 @@ function App() {
           </div>
         </div>
 
-        <div className="hero-profile-card">
-          <div className="profile-photo-wrap">
-            <img src={profilePhoto} alt="Aditya Kusuma" />
-          </div>
-
-          <div className="profile-card-info">
-            <span>Aditya Kusuma</span>
-            <strong>{t.hero.role}</strong>
-            <p>Business Systems • Web Apps • Data Analytics</p>
-          </div>
+        <div className="hero-profile-wrapper">
+          <LanyardCard />
         </div>
 
         <div className="scroll-indicator">
@@ -635,19 +695,19 @@ function App() {
       <section className="role-section">
         <div className="section-intro reveal">
           <p className="section-eyebrow">{t.rolesTitle}</p>
-          <h2>{activeRole}</h2>
-          <p>{t.rolesDesc}</p>
+          <h2>{roleLabels[language][activeRole]}</h2>
+          <p>{roleDescriptions[language][activeRole]}</p>
         </div>
 
         <div className="role-grid reveal">
           {targetRoles.map((role) => (
-            <button
-              key={role}
-              className={`role-pill ${activeRole === role ? "active" : ""}`}
-              onClick={() => setActiveRole(role)}
-            >
-              {role}
-            </button>
+        <button
+          key={role}
+          className={`role-pill ${activeRole === role ? "active" : ""}`}
+          onClick={() => setActiveRole(role)}
+        >
+          {roleLabels[language][role]}
+        </button>
           ))}
         </div>
       </section>
@@ -688,10 +748,17 @@ function App() {
 
           <div className="panel-image">
             {t.slides.map((slide, index) => (
-              <div key={slide.image} className={`image-slide ${activeSlide === index ? "active" : ""}`}>
-                <img src={slide.image} alt={slide.badge} />
-                <div className="image-overlay"></div>
-                <div className="image-badge">{slide.badge}</div>
+              <div
+                key={slide.image}
+                className={`image-slide ${
+                  activeSlide === index ? "active" : ""
+                }`}
+              >
+                <div className="image-card">
+                  <img src={slide.image} alt={slide.badge} />
+                  <div className="image-overlay"></div>
+                  <div className="image-badge">{slide.badge}</div>
+                </div>
               </div>
             ))}
           </div>
@@ -830,7 +897,7 @@ function App() {
       </section>
 
       <footer className="footer">
-        <p>Terimakasih</p>
+        <p>{t.thankYou}</p>
         <span>{t.footer}</span>
       </footer>
 

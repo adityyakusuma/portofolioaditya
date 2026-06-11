@@ -1,0 +1,222 @@
+.responsive-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1100px;
+}
+
+.aesthetic-profile-card {
+  position: relative;
+  width: min(390px, 100%);
+  padding: 1.1rem;
+  border-radius: 32px;
+  background:
+    linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.96)),
+    radial-gradient(circle at top, rgba(99, 140, 255, 0.2), transparent 45%);
+  border: 1px solid var(--border);
+  box-shadow:
+    0 42px 90px rgba(0, 0, 0, 0.58),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(24px);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  opacity: 0;
+  transform: translateY(24px);
+  animation:
+    profileFloatIn 1s var(--ease-out) forwards,
+    floatingCard 6s ease-in-out 1s infinite;
+  transition:
+    transform 0.45s var(--ease-out),
+    border-color 0.45s var(--ease-out),
+    box-shadow 0.45s var(--ease-out);
+}
+
+.aesthetic-profile-card:hover {
+  transform:
+    translateY(-16px)
+    rotateX(4deg)
+    rotateY(-4deg);
+  border-color: var(--border-glow);
+  box-shadow:
+    0 70px 140px rgba(0, 0, 0, 0.7),
+    0 0 60px rgba(99, 140, 255, 0.25);
+}
+
+.aesthetic-profile-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.11) 35%,
+      transparent 65%
+    );
+  transform: translateX(-120%);
+  transition: transform 0.8s ease;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.aesthetic-profile-card:hover::before {
+  transform: translateX(120%);
+}
+
+.card-glow {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(30px);
+  opacity: 0.75;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card-glow-one {
+  width: 180px;
+  height: 180px;
+  top: -55px;
+  right: -55px;
+  background: var(--blue-3);
+  animation: glowMove1 8s ease-in-out infinite;
+}
+
+.card-glow-two {
+  width: 140px;
+  height: 140px;
+  bottom: 60px;
+  left: -60px;
+  background: var(--blue-2);
+  animation: glowMove2 10s ease-in-out infinite;
+}
+
+.profile-frame {
+  position: relative;
+  height: 365px;
+  border-radius: 26px;
+  overflow: hidden;
+  border: 1px solid var(--border-glow);
+  background:
+    linear-gradient(135deg, rgba(99, 140, 255, 0.22), transparent),
+    var(--bg-card);
+  z-index: 2;
+  transform: translateZ(28px);
+}
+
+.profile-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(5, 8, 17, 0.5), transparent 42%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.16), transparent 36%);
+  pointer-events: none;
+}
+
+.profile-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transform: scale(1.03);
+  transition: transform 0.8s ease;
+}
+
+.aesthetic-profile-card:hover .profile-frame img {
+  transform: scale(1.08);
+}
+
+.profile-name {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 1.35rem 0 0.15rem;
+  transform: translateZ(42px);
+}
+
+.profile-name h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.34rem;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+@keyframes profileFloatIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatingCard {
+  0% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -12px;
+  }
+
+  100% {
+    translate: 0 0;
+  }
+}
+
+@keyframes glowMove1 {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(-20px, 20px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes glowMove2 {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(20px, -20px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@media (max-width: 900px) {
+  .aesthetic-profile-card {
+    width: min(360px, 100%);
+  }
+
+  .profile-frame {
+    height: 340px;
+  }
+}
+
+@media (max-width: 520px) {
+  .aesthetic-profile-card {
+    width: min(330px, 100%);
+    padding: 0.9rem;
+    border-radius: 26px;
+  }
+
+  .profile-frame {
+    height: 310px;
+    border-radius: 22px;
+  }
+
+  .profile-name h3 {
+    font-size: 0.95rem;
+    letter-spacing: 0.24rem;
+  }
+}
