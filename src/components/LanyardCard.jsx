@@ -1,5 +1,5 @@
 import "./LanyardCard.css";
-import profilePhoto from "../assets/put.jpg";
+import profilePhoto from "../assets/aditya-profile.png";
 
 function LanyardCard() {
   return (
